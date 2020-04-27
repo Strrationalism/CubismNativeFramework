@@ -1,8 +1,8 @@
-﻿/*
+﻿/**
  * Copyright(c) Live2D Inc. All rights reserved.
  *
  * Use of this source code is governed by the Live2D Open Software license
- * that can be found at http://live2d.com/eula/live2d-open-software-license-agreement_en.html.
+ * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 
 #pragma once
@@ -30,11 +30,12 @@ public:
      *
      * インスタンスを作成する。
      *
-     * @param[in]   buffer  motion3.jsonが読み込まれているバッファ
-     * @param[in]   size    バッファのサイズ
+     * @param[in]   buffer                      motion3.jsonが読み込まれているバッファ
+     * @param[in]   size                        バッファのサイズ
+     * @param[in]   onFinishedMotionHandler     モーション再生終了時に呼び出されるコールバック関数。NULLの場合、呼び出されない。
      * @return  作成されたインスタンス
      */
-    static CubismMotion* Create(const csmByte* buffer, csmSizeInt size);
+    static CubismMotion* Create(const csmByte* buffer, csmSizeInt size, FinishedMotionCallback onFinishedMotionHandler = NULL);
 
     /**
     * @brief モデルのパラメータの更新の実行

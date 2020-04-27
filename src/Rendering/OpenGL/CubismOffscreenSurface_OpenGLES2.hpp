@@ -1,8 +1,8 @@
-﻿/*
+﻿/**
  * Copyright(c) Live2D Inc. All rights reserved.
  *
  * Use of this source code is governed by the Live2D Open Software license
- * that can be found at http://live2d.com/eula/live2d-open-software-license-agreement_en.html.
+ * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 
 #pragma once
@@ -25,13 +25,15 @@
 #include <OpenGLES/ES2/glext.h>
 #endif
 
-#ifdef CSM_TARGET_WIN_GL
+#if defined(CSM_TARGET_WIN_GL) || defined(CSM_TARGET_LINUX_GL)
 #include <GL/glew.h>
 #include <GL/gl.h>
 #endif
 
 #ifdef CSM_TARGET_MAC_GL
+#ifndef CSM_TARGET_COCOS
 #include <GL/glew.h>
+#endif
 #include <OpenGL/gl.h>
 #endif
 
@@ -50,7 +52,7 @@ public:
 
     /**
      * @brief   指定の描画ターゲットに向けて描画開始
-     * 
+     *
      * @param   restoreFBO        0以上の場合、EndDrawでこの値をglBindFramebufferする
      */
     void BeginDraw(GLint restoreFBO = -1);
@@ -106,12 +108,12 @@ public:
 
 private:
     GLuint      _renderTexture;         ///< レンダリングターゲットとしてのアドレス
-    GLuint      _colorBuffer;           ///< 描画の際使用するテクスチャとしてのアドレス 
+    GLuint      _colorBuffer;           ///< 描画の際使用するテクスチャとしてのアドレス
 
-    GLint       _oldFBO;                ///< 旧フレームバッファ 
+    GLint       _oldFBO;                ///< 旧フレームバッファ
 
-    csmUint32   _bufferWidth;           ///< Create時に指定された幅 
-    csmUint32   _bufferHeight;          ///< Create時に指定された高さ 
+    csmUint32   _bufferWidth;           ///< Create時に指定された幅
+    csmUint32   _bufferHeight;          ///< Create時に指定された高さ
 };
 
 

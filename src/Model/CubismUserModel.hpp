@@ -1,8 +1,8 @@
-﻿/*
+﻿/**
  * Copyright(c) Live2D Inc. All rights reserved.
  *
  * Use of this source code is governed by the Live2D Open Software license
- * that can be found at http://live2d.com/eula/live2d-open-software-license-agreement_en.html.
+ * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 
 #pragma once
@@ -145,12 +145,13 @@ public:
      *
      * モーションデータを読み込む。
      *
-     * @param[in]   buffer  motion3.jsonファイルが読み込まれているバッファ
-     * @param[in]   size    バッファのサイズ
-     * @param[in]   name    モーションの名前
+     * @param[in]   buffer                      motion3.jsonファイルが読み込まれているバッファ
+     * @param[in]   size                        バッファのサイズ
+     * @param[in]   name                        モーションの名前
+     * @param[in]   onFinishedMotionHandler     モーション再生終了時に呼び出されるコールバック関数。NULLの場合、呼び出されない。
      * @return  モーションクラス
      */
-    virtual ACubismMotion*  LoadMotion(const csmByte* buffer, csmSizeInt size, const csmChar* name);
+    virtual ACubismMotion*  LoadMotion(const csmByte* buffer, csmSizeInt size, const csmChar* name, ACubismMotion::FinishedMotionCallback onFinishedMotionHandler = NULL);
 
     /**
      * @brief 表情データの読み込み

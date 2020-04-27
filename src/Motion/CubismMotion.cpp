@@ -1,8 +1,8 @@
-﻿/*
+﻿/**
  * Copyright(c) Live2D Inc. All rights reserved.
  *
  * Use of this source code is governed by the Live2D Open Software license
- * that can be found at http://live2d.com/eula/live2d-open-software-license-agreement_en.html.
+ * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 
 #include "CubismMotion.hpp"
@@ -132,13 +132,14 @@ CubismMotion::~CubismMotion()
     CSM_DELETE(_motionData);
 }
 
-CubismMotion* CubismMotion::Create(const csmByte* buffer, csmSizeInt size)
+CubismMotion* CubismMotion::Create(const csmByte* buffer, csmSizeInt size, FinishedMotionCallback onFinishedMotionHandler)
 {
     CubismMotion* ret = CSM_NEW CubismMotion();
 
     ret->Parse(buffer, size);
     ret->_sourceFrameRate = ret->_motionData->Fps;
     ret->_loopDurationSeconds = ret->_motionData->Duration;
+    ret->_onFinishedMotion = onFinishedMotionHandler;
 
     // NOTE: Editorではループありのモーション書き出しは非対応
     // ret->_loop = (ret->_motionData->Loop > 0);
@@ -384,6 +385,11 @@ void CubismMotion::DoUpdateParameters(CubismModel* model, csmFloat32 userTimeSec
         }
         else
         {
+            if (this->_onFinishedMotion != NULL)
+            {
+                this->_onFinishedMotion(this);
+            }
+
             motionQueueEntry->IsFinished(true);
         }
     }
